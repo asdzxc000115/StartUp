@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>즐겨찾기 - 맛집 탐색기</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/favorites.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-utensils"></i>
+            <h1>맛집 탐색기</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">홈</a></li>
+                <li><a href="/favorites">즐겨찾기</a></li>
+                <li><a href="/reviews">리뷰</a></li>
+                <li><a href="/login">로그인</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</header>
+
+<section class="favorites-header">
+    <div class="container">
+        <h2>내 즐겨찾기</h2>
+        <p>저장한 맛집들을 한눈에 확인하고 관리하세요</p>
+    </div>
+</section>
+
+<section class="favorites-content">
+    <div class="container">
+        <div class="favorites-filter">
+            <div class="filter-options">
+                <select id="category-filter">
+                    <option value="">모든 카테고리</option>
+                    <option value="korean">한식</option>
+                    <option value="chinese">중식</option>
+                    <option value="japanese">일식</option>
+                    <option value="western">양식</option>
+                    <option value="cafe">카페/디저트</option>
+                    <option value="fastfood">패스트푸드</option>
+                </select>
+                <select id="sort-option">
+                    <option value="recent">최근 저장순</option>
+                    <option value="rating">평점순</option>
+                    <option value="name">이름순</option>
+                </select>
+            </div>
+            <div class="search-box">
+                <input type="text" id="search-favorites" placeholder="즐겨찾기 검색">
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+
+        <div class="favorites-list" id="favorites-container">
+            <!-- 즐겨찾기 목록이 자바스크립트로 여기에 추가됩니다 -->
+
+            <!-- 표시용 샘플 데이터 -->
+            <div class="favorite-item">
+                <div class="favorite-image">
+                    <img src="https://via.placeholder.com/300x200" alt="식당 이미지">
+                    <span class="rating"><i class="fas fa-star"></i> 4.5</span>
+                    <button class="remove-favorite"><i class="fas fa-trash-alt"></i></button>
+                </div>
+                <div class="favorite-info">
+                    <h3>맛있는 한식당</h3>
+                    <p class="category">한식 • 강남구</p>
+                    <p class="address"><i class="fas fa-map-marker-alt"></i> 서울시 강남구 역삼동 123-45</p>
+                    <div class="favorite-actions">
+                        <button class="btn-view"><i class="fas fa-info-circle"></i> 상세정보</button>
+                        <button class="btn-navigate"><i class="fas fa-directions"></i> 길찾기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="favorite-item">
+                <div class="favorite-image">
+                    <img src="https://via.placeholder.com/300x200" alt="식당 이미지">
+                    <span class="rating"><i class="fas fa-star"></i> 4.8</span>
+                    <button class="remove-favorite"><i class="fas fa-trash-alt"></i></button>
+                </div>
+                <div class="favorite-info">
+                    <h3>분위기 좋은 카페</h3>
+                    <p class="category">카페 • 강남구</p>
+                    <p class="address"><i class="fas fa-map-marker-alt"></i> 서울시 강남구 역삼동 456-78</p>
+                    <div class="favorite-actions">
+                        <button class="btn-view"><i class="fas fa-info-circle"></i> 상세정보</button>
+                        <button class="btn-navigate"><i class="fas fa-directions"></i> 길찾기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="favorite-item">
+                <div class="favorite-image">
+                    <img src="https://via.placeholder.com/300x200" alt="식당 이미지">
+                    <span class="rating"><i class="fas fa-star"></i> 4.2</span>
+                    <button class="remove-favorite"><i class="fas fa-trash-alt"></i></button>
+                </div>
+                <div class="favorite-info">
+                    <h3>스시 오마카세</h3>
+                    <p class="category">일식 • 강남구</p>
+                    <p class="address"><i class="fas fa-map-marker-alt"></i> 서울시 강남구 역삼동 789-10</p>
+                    <div class="favorite-actions">
+                        <button class="btn-view"><i class="fas fa-info-circle"></i> 상세정보</button>
+                        <button class="btn-navigate"><i class="fas fa-directions"></i> 길찾기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="empty-favorites" style="display: none;">
+            <i class="fas fa-bookmark"></i>
+            <h3>저장된 즐겨찾기가 없습니다</h3>
+            <p>관심있는 맛집을 즐겨찾기에 추가해보세요!</p>
+            <a href="/" class="btn-primary">맛집 찾아보기</a>
+        </div>
+
+        <div class="pagination">
+            <button class="pagination-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <div class="page-numbers">
+                <button class="page-number active">1</button>
+                <button class="page-number">2</button>
+                <button class="page-number">3</button>
+            </div>
+            <button class="pagination-btn next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="logo">
+                    <i class="fas fa-utensils"></i>
+                    <h2>맛집 탐색기</h2>
+                </div>
+                <p>내 주변의 맛집을 쉽고 빠르게 찾아보세요</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>서비스</h4>
+                    <ul>
+                        <li><a href="/">맛집 찾기</a></li>
+                        <li><a href="/reviews.html">리뷰 작성</a></li>
+                        <li><a href="/favorites.html">즐겨찾기</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>정보</h4>
+                    <ul>
+                        <li><a href="#">서비스 소개</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">개인정보처리방침</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>문의</h4>
+                    <ul>
+                        <li><a href="#">고객센터</a></li>
+                        <li><a href="#">제휴문의</a></li>
+                        <li><a href="#">광고문의</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 맛집 탐색기. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script src="/js/favorites.js"></script>
+</body>
+</html>

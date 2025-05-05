@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 - 맛집 탐색기</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-utensils"></i>
+            <h1>맛집 탐색기</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">홈</a></li>
+                <li><a href="/favorites">즐겨찾기</a></li>
+                <li><a href="/reviews">리뷰</a></li>
+                <li><a href="/login">로그인</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</header>
+
+<section class="login-section">
+    <div class="container">
+        <div class="login-container">
+            <h2>로그인</h2>
+            <div class="login-options">
+                <div class="login-tabs">
+                    <button class="login-tab active" data-tab="login-form">로그인</button>
+                    <button class="login-tab" data-tab="signup-form">회원가입</button>
+                </div>
+
+                <div class="login-form-container active" id="login-form">
+                    <form id="login-form-element">
+                        <div class="form-group">
+                            <label for="login-email">이메일</label>
+                            <input type="email" id="login-email" required placeholder="이메일 주소를 입력하세요">
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">비밀번호</label>
+                            <input type="password" id="login-password" required placeholder="비밀번호를 입력하세요">
+                        </div>
+                        <div class="form-group remember-me">
+                            <input type="checkbox" id="remember-me">
+                            <label for="remember-me">자동 로그인</label>
+                            <a href="#" class="forgot-password">비밀번호 찾기</a>
+                        </div>
+                        <button type="submit" class="btn-primary">로그인</button>
+                    </form>
+                </div>
+
+                <div class="login-form-container" id="signup-form">
+                    <form id="signup-form-element">
+                        <div class="form-group">
+                            <label for="signup-name">이름</label>
+                            <input type="text" id="signup-name" required placeholder="이름을 입력하세요">
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-email">이메일</label>
+                            <input type="email" id="signup-email" required placeholder="이메일 주소를 입력하세요">
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-password">비밀번호</label>
+                            <input type="password" id="signup-password" required placeholder="비밀번호를 입력하세요 (8자 이상)">
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-password-confirm">비밀번호 확인</label>
+                            <input type="password" id="signup-password-confirm" required placeholder="비밀번호를 다시 입력하세요">
+                        </div>
+                        <div class="form-group terms">
+                            <input type="checkbox" id="terms" required>
+                            <label for="terms">
+                                <a href="#" class="terms-link">이용약관</a>과
+                                <a href="#" class="terms-link">개인정보 처리방침</a>에 동의합니다.
+                            </label>
+                        </div>
+                        <button type="submit" class="btn-primary">회원가입</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="logo">
+                    <i class="fas fa-utensils"></i>
+                    <h2>맛집 탐색기</h2>
+                </div>
+                <p>내 주변의 맛집을 쉽고 빠르게 찾아보세요</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>서비스</h4>
+                    <ul>
+                        <li><a href="/static">맛집 찾기</a></li>
+                        <li><a href="/reviews.html">리뷰 작성</a></li>
+                        <li><a href="/favorites">즐겨찾기</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>정보</h4>
+                    <ul>
+                        <li><a href="#">서비스 소개</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">개인정보처리방침</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>문의</h4>
+                    <ul>
+                        <li><a href="#">고객센터</a></li>
+                        <li><a href="#">제휴문의</a></li>
+                        <li><a href="#">광고문의</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 맛집 탐색기. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script src="/js/login.js"></script>
+</body>
+</html>

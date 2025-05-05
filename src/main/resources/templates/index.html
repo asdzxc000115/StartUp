@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>맛집 탐색기 - 인하대 후문 주변 맛집 찾기</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- 카카오맵 API -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=71618b59fd9edd408b6aa0e6ed2122c8&libraries=services"></script>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-utensils"></i>
+            <h1>맛집 탐색기</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/" class="active">홈</a></li>
+                <li><a href="/favorites">즐겨찾기</a></li>
+                <li><a href="/reviews">리뷰</a></li>
+                <li><a href="/login">로그인</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h2>인하대 후문 주변의 맛집을 찾아보세요</h2>
+            <p>맛집 이름, 음식 종류, 가격대별로 다양한 음식점을 검색하고 리뷰를 확인하세요.</p>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="restaurant-name-input" placeholder="맛집 이름을 입력하세요">
+                    <select id="food-type">
+                        <option value="">음식 종류 (전체)</option>
+                        <option value="korean">한식</option>
+                        <option value="chinese">중식</option>
+                        <option value="japanese">일식</option>
+                        <option value="western">양식</option>
+                        <option value="cafe">카페/디저트</option>
+                        <option value="fastfood">패스트푸드</option>
+                    </select>
+                    <select id="price-range">
+                        <option value="">가격대 (전체)</option>
+                        <option value="low">~ 1만원</option>
+                        <option value="medium">1만원 ~ 3만원</option>
+                        <option value="high">3만원 ~</option>
+                    </select>
+                    <button id="search-btn"><i class="fas fa-search"></i> 검색</button>
+                </div>
+                <div class="current-location">
+                    <button id="current-location-btn"><i class="fas fa-map-marker-alt"></i> 현재 위치 사용</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="main-content">
+    <div class="container">
+        <div class="content-header">
+            <h3>내 주변 인기 맛집</h3>
+            <div class="filter-options">
+                <span>정렬: </span>
+                <select id="sort-option">
+                    <option value="rating">평점순</option>
+                    <option value="distance">거리순</option>
+                    <option value="reviews">리뷰많은순</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="restaurant-list" id="restaurant-container">
+            <!-- 레스토랑 아이템들이 자바스크립트로 여기에 추가됩니다 -->
+
+            <!-- 로딩 시 표시할 샘플 데이터 -->
+            <div class="restaurant-item">
+                <div class="restaurant-image">
+                    <img src="https://via.placeholder.com/300x200" alt="식당 이미지">
+                    <span class="rating"><i class="fas fa-star"></i> 4.5</span>
+                </div>
+                <div class="restaurant-info">
+                    <h4>맛있는 한식당</h4>
+                    <p class="category">한식 • 강남구</p>
+                    <p class="address"><i class="fas fa-map-marker-alt"></i> 서울시 강남구 역삼동 123-45</p>
+                    <p class="distance"><i class="fas fa-walking"></i> 도보 10분</p>
+                    <div class="restaurant-tags">
+                        <span>주차가능</span>
+                        <span>단체석</span>
+                        <span>배달가능</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="restaurant-item">
+                <div class="restaurant-image">
+                    <img src="https://via.placeholder.com/300x200" alt="식당 이미지">
+                    <span class="rating"><i class="fas fa-star"></i> 4.8</span>
+                </div>
+                <div class="restaurant-info">
+                    <h4>분위기 좋은 카페</h4>
+                    <p class="category">카페 • 강남구</p>
+                    <p class="address"><i class="fas fa-map-marker-alt"></i> 서울시 강남구 역삼동 456-78</p>
+                    <p class="distance"><i class="fas fa-walking"></i> 도보 5분</p>
+                    <div class="restaurant-tags">
+                        <span>와이파이</span>
+                        <span>콘센트</span>
+                        <span>테라스</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="restaurant-item">
+                <div class="restaurant-image">
+                    <img src="https://via.placeholder.com/300x200" alt="식당 이미지">
+                    <span class="rating"><i class="fas fa-star"></i> 4.2</span>
+                </div>
+                <div class="restaurant-info">
+                    <h4>스시 오마카세</h4>
+                    <p class="category">일식 • 강남구</p>
+                    <p class="address"><i class="fas fa-map-marker-alt"></i> 서울시 강남구 역삼동 789-10</p>
+                    <p class="distance"><i class="fas fa-walking"></i> 도보 15분</p>
+                    <div class="restaurant-tags">
+                        <span>예약필수</span>
+                        <span>오마카세</span>
+                        <span>술있음</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="load-more">
+            <button id="load-more-btn">더 보기 <i class="fas fa-chevron-down"></i></button>
+        </div>
+    </div>
+</section>
+
+<section class="map-section">
+    <div class="container">
+        <h3>지도로 보기</h3>
+        <div id="kakao-map" style="width:100%;height:400px;border-radius:8px;"></div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <h3>맛집 탐색기 특징</h3>
+        <div class="feature-container">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h4>내 주변 맛집 찾기</h4>
+                <p>현재 위치를 기반으로 가까운 맛집을 쉽게 찾을 수 있습니다.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h4>실제 사용자 리뷰</h4>
+                <p>방문한 고객들의 솔직한 리뷰를 확인할 수 있습니다.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-bookmark"></i>
+                </div>
+                <h4>맛집 저장하기</h4>
+                <p>마음에 드는 맛집을 저장하고 나중에 다시 찾아볼 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="logo">
+                    <i class="fas fa-utensils"></i>
+                    <h2>맛집 탐색기</h2>
+                </div>
+                <p>내 주변의 맛집을 쉽고 빠르게 찾아보세요</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>서비스</h4>
+                    <ul>
+                        <li><a href="#">맛집 찾기</a></li>
+                        <li><a href="#">리뷰 작성</a></li>
+                        <li><a href="#">즐겨찾기</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>정보</h4>
+                    <ul>
+                        <li><a href="#">서비스 소개</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">개인정보처리방침</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>문의</h4>
+                    <ul>
+                        <li><a href="#">고객센터</a></li>
+                        <li><a href="#">제휴문의</a></li>
+                        <li><a href="#">광고문의</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 맛집 탐색기. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script src="/js/kakao-map.js"></script>
+</body>
+</html>

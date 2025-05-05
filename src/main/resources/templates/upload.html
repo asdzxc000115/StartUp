@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사진 인원수 확인 - 맛집 탐색기</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .upload-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .upload-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .file-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .upload-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .upload-btn:hover {
+            background-color: #fa5252;
+        }
+        .result-container {
+            margin-top: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: none;
+        }
+        .result-text {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .image-item {
+            flex: 1;
+            min-width: 250px;
+            max-width: 100%;
+        }
+        .image-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        .loading {
+            text-align: center;
+            display: none;
+        }
+        .loading i {
+            font-size: 2rem;
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-utensils"></i>
+            <h1>맛집 탐색기</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">홈</a></li>
+                <li><a href="/favorites">즐겨찾기</a></li>
+                <li><a href="/reviews">리뷰</a></li>
+                <li><a href="/login">로그인</a></li>
+                <li><a href="/upload" class="active">인원수 확인</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</header>
+
+<section class="upload-container">
+    <h2 class="upload-title">사진 속 인원수 확인</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="fileInput" name="file" class="file-input" accept="image/*" required>
+        <button type="submit" class="upload-btn">사진 업로드</button>
+    </form>
+
+    <div class="loading">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>인원수를 분석 중입니다...</p>
+    </div>
+
+    <div class="result-container" id="resultContainer">
+        <div class="result-text" id="resultText"></div>
+        <div class="image-container">
+            <div class="image-item">
+                <h4>원본 이미지</h4>
+                <img id="originalImage" src="" alt="원본 이미지">
+            </div>
+            <div class="image-item">
+                <h4>감지 결과</h4>
+                <img id="resultImage" src="" alt="감지 결과">
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="logo">
+                    <i class="fas fa-utensils"></i>
+                    <h2>맛집 탐색기</h2>
+                </div>
+                <p>내 주변의 맛집을 쉽고 빠르게 찾아보세요</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>서비스</h4>
+                    <ul>
+                        <li><a href="/">맛집 찾기</a></li>
+                        <li><a href="/reviews">리뷰 작성</a></li>
+                        <li><a href="/favorites">즐겨찾기</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>정보</h4>
+                    <ul>
+                        <li><a href="#">서비스 소개</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">개인정보처리방침</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>문의</h4>
+                    <ul>
+                        <li><a href="#">고객센터</a></li>
+                        <li><a href="#">제휴문의</a></li>
+                        <li><a href="#">광고문의</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 맛집 탐색기. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const fileInput = document.getElementById('fileInput');
+        const file = fileInput.files[0];
+
+        if (file) {
+            // 로딩 표시
+            document.querySelector('.loading').style.display = 'block';
+            document.getElementById('resultContainer').style.display = 'none';
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // 로딩 숨기기
+                    document.querySelector('.loading').style.display = 'none';
+
+                    // 결과 표시
+                    document.getElementById('resultText').textContent = `사진 속 사람 수: ${data.count}명`;
+                    document.getElementById('originalImage').src = data.originalImage;
+                    document.getElementById('resultImage').src = data.resultImage;
+                    document.getElementById('resultContainer').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.querySelector('.loading').style.display = 'none';
+                    alert('파일 업로드 중 오류가 발생했습니다.');
+                });
+        }
+    });
+</script>
+</body>
+</html>

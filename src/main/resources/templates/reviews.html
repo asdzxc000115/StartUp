@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리뷰 - 맛집 탐색기</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/reviews.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-utensils"></i>
+            <h1>맛집 탐색기</h1>
+        </div>
+    </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="logo">
+                        <i class="fas fa-utensils"></i>
+                        <h2>맛집 탐색기</h2>
+                    </div>
+                    <p>내 주변의 맛집을 쉽고 빠르게 찾아보세요</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>서비스</h4>
+                        <ul>
+                            <li><a href="/">맛집 찾기</a></li>
+                            <li><a href="/reviews.html">리뷰 작성</a></li>
+                            <li><a href="/favorites">즐겨찾기</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4>정보</h4>
+                        <ul>
+                            <li><a href="#">서비스 소개</a></li>
+                            <li><a href="#">이용약관</a></li>
+                            <li><a href="#">개인정보처리방침</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4>문의</h4>
+                        <ul>
+                            <li><a href="#">고객센터</a></li>
+                            <li><a href="#">제휴문의</a></li>
+                            <li><a href="#">광고문의</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 맛집 탐색기. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/reviews.js"></script>
+    <nav>
+        <ul>
+            <li><a href="/">홈</a></li>
+            <li><a href="/favorites">즐겨찾기</a></li>
+            <li><a href="/reviews">리뷰</a></li>
+            <li><a href="/login">로그인</a></li>
+        </ul>
+    </nav>
+    <div class="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    </div>
+</header>
+
+<section class="reviews-header">
+    <div class="container">
+        <h2>맛집 리뷰</h2>
+        <p>방문한 맛집의 솔직한 리뷰를 남기고 다른 사용자들의 리뷰를 확인하세요</p>
+        <div class="review-tabs">
+            <button class="review-tab active" data-tab="my-reviews">내가 작성한 리뷰</button>
+            <button class="review-tab" data-tab="all-reviews">모든 리뷰</button>
+            <button class="review-tab" data-tab="write-review">리뷰 작성하기</button>
+        </div>
+    </div>
+</section>
+
+<section class="reviews-content">
+    <div class="container">
+        <!-- 내가 작성한 리뷰 탭 -->
+        <div class="review-tab-content active" id="my-reviews">
+            <div class="reviews-filter">
+                <div class="filter-options">
+                    <select id="my-review-sort">
+                        <option value="recent">최신순</option>
+                        <option value="rating-high">평점 높은순</option>
+                        <option value="rating-low">평점 낮은순</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <button class="pagination-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="page-numbers">
+                    <button class="page-number active">1</button>
+                    <button class="page-number">2</button>
+                    <button class="page-number">3</button>
+                </div>
+                <button class="pagination-btn next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <!-- 리뷰 작성하기 탭 -->
+        <div class="review-tab-content" id="write-review">
+            <div class="write-review-container">
+                <form id="review-form">
+                    <div class="form-group">
+                        <label for="restaurant-select">식당 선택</label>
+                        <select id="restaurant-select" required>
+                            <option value="">방문한 식당을 선택해주세요</option>
+                            <option value="1">맛있는 한식당</option>
+                            <option value="2">분위기 좋은 카페</option>
+                            <option value="3">스시 오마카세</option>
+                            <option value="4">이탈리안 레스토랑</option>
+                            <option value="5">중국집 원조</option>
+                        </select>
+                        <button type="button" id="restaurant-search" class="btn-secondary">식당 검색</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="visit-date">방문 날짜</label>
+                        <input type="date" id="visit-date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>평점</label>
+                        <div class="rating-input">
+                            <i class="far fa-star" data-rating="1"></i>
+                            <i class="far fa-star" data-rating="2"></i>
+                            <i class="far fa-star" data-rating="3"></i>
+                            <i class="far fa-star" data-rating="4"></i>
+                            <i class="far fa-star" data-rating="5"></i>
+                            <input type="hidden" id="rating-value" name="rating" value="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="review-text">리뷰 내용</label>
+                        <textarea id="review-text" rows="5" placeholder="식당에 대한 솔직한 리뷰를 작성해주세요" required></textarea>
+                        <div class="text-counter"><span id="char-count">0</span>/500자</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>사진 첨부 (최대 5장)</label>
+                        <div class="image-upload-container">
+                            <div class="image-upload">
+                                <input type="file" id="review-image" accept="image/*" multiple>
+                                <label for="review-image">
+                                    <i class="fas fa-camera"></i>
+                                    <span>사진 추가</span>
+                                </label>
+                            </div>
+                            <div class="image-preview" id="image-preview"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="reset" class="btn-secondary">취소</button>
+                        <button type="submit" class="btn-primary">리뷰 등록</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="search-box">
+            <input type="text" id="search-my-reviews" placeholder="리뷰 검색">
+            <button id="search-my-btn"><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+
+    <div class="reviews-list" id="my-reviews-container">
+        <!-- 내 리뷰 목록이 자바스크립트로 여기에 추가됩니다 -->
+
+        <!-- 표시용 샘플 데이터 -->
+        <div class="review-item">
+            <div class="review-header">
+                <div class="restaurant-info">
+                    <h3>맛있는 한식당</h3>
+                    <p class="category">한식 • 강남구</p>
+                </div>
+                <div class="review-rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span>4.5</span>
+                </div>
+            </div>
+            <div class="review-content">
+                <p>고기가 정말 신선하고 맛있었어요! 반찬도 푸짐하게 나와서 만족스러웠습니다. 다음에도 꼭 방문하고 싶은 맛집입니다. 직원분들도 친절하셔서 좋았습니다.</p>
+            </div>
+            <div class="review-images">
+                <img src="https://via.placeholder.com/150" alt="리뷰 이미지">
+                <img src="https://via.placeholder.com/150" alt="리뷰 이미지">
+            </div>
+            <div class="review-footer">
+                <span class="review-date">2025.03.15 방문</span>
+                <div class="review-actions">
+                    <button class="btn-edit"><i class="fas fa-edit"></i> 수정</button>
+                    <button class="btn-delete"><i class="fas fa-trash-alt"></i> 삭제</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-item">
+            <div class="review-header">
+                <div class="restaurant-info">
+                    <h3>분위기 좋은 카페</h3>
+                    <p class="category">카페 • 강남구</p>
+                </div>
+                <div class="review-rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <span>4.0</span>
+                </div>
+            </div>
+            <div class="review-content">
+                <p>커피 맛이 좋고 인테리어가 예뻐요. 조용한 분위기에서 작업하기 좋습니다. 직원분들도 친절하셔서 자주 방문하게 되는 곳입니다.</p>
+            </div>
+            <div class="review-footer">
+                <span class="review-date">2025.03.10 방문</span>
+                <div class="review-actions">
+                    <button class="btn-edit"><i class="fas fa-edit"></i> 수정</button>
+                    <button class="btn-delete"><i class="fas fa-trash-alt"></i> 삭제</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="empty-reviews" style="display: none;">
+        <i class="fas fa-comment-slash"></i>
+        <h3>작성한 리뷰가 없습니다</h3>
+        <p>방문한 맛집에 리뷰를 남겨보세요!</p>
+        <button class="btn-primary" id="start-review">리뷰 작성하기</button>
+    </div>
+
+    <div class="pagination">
+        <button class="pagination-btn prev"><i class="fas fa-chevron-left"></i></button>
+        <div class="page-numbers">
+            <button class="page-number active">1</button>
+            <button class="page-number">2</button>
+        </div>
+        <button class="pagination-btn next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    </div>
+
+    <!-- 모든 리뷰 탭 -->
+    <div class="review-tab-content" id="all-reviews">
+        <div class="reviews-filter">
+            <div class="filter-options">
+                <select id="all-review-category">
+                    <option value="">모든 카테고리</option>
+                    <option value="korean">한식</option>
+                    <option value="chinese">중식</option>
+                    <option value="japanese">일식</option>
+                    <option value="western">양식</option>
+                    <option value="cafe">카페/디저트</option>
+                </select>
+                <select id="all-review-sort">
+                    <option value="recent">최신순</option>
+                    <option value="rating-high">평점 높은순</option>
+                    <option value="rating-low">평점 낮은순</option>
+                    <option value="likes">좋아요순</option>
+                </select>
+            </div>
+            <div class="search-box">
+                <input type="text" id="search-all-reviews" placeholder="식당이나 메뉴 검색">
+                <button id="search-all-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+
+        <div class="reviews-list" id="all-reviews-container">
+            <!-- 모든 리뷰 목록이 자바스크립트로 여기에 추가됩니다 -->
+
+            <!-- 표시용 샘플 데이터 -->
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="restaurant-info">
+                        <h3>스시 오마카세</h3>
+                        <p class="category">일식 • 강남구</p>
+                    </div>
+                    <div class="review-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span>5.0</span>
+                    </div>
+                </div>
+                <div class="reviewer-info">
+                    <img src="https://via.placeholder.com/40" alt="프로필 이미지" class="reviewer-img">
+                    <span class="reviewer-name">맛집탐험가</span>
+                    <span class="review-date">2025.03.20 방문</span>
+                </div>
+                <div class="review-content">
+                    <p>재료가 너무 신선하고 셰프의 솜씨가 대단했습니다. 가격은 조금 있지만 그만한 가치가 있는 곳입니다. 특히 밀치와 청어가 일품이었습니다!</p>
+                </div>
+                <div class="review-images">
+                    <img src="https://via.placeholder.com/150" alt="리뷰 이미지">
+                    <img src="https://via.placeholder.com/150" alt="리뷰 이미지">
+                    <img src="https://via.placeholder.com/150" alt="리뷰 이미지">
+                </div>
+                <div class="review-footer">
+                    <div class="review-reactions">
+                        <button class="btn-like">
+                            <i class="far fa-thumbs-up"></i>
+                            <span>12</span>
+                        </button>
+                        <button class="btn-comment">
+                            <i class="far fa-comment"></i>
+                            <span>3</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="restaurant-info">
+                        <h3>이탈리안 레스토랑</h3>
+                        <p class="category">양식 • 강남구</p>
+                    </div>
+                    <div class="review-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <span>3.5</span>
+                    </div>
+                </div>
+                <div class="reviewer-info">
+                    <img src="https://via.placeholder.com/40" alt="프로필 이미지" class="reviewer-img">
+                    <span class="reviewer-name">푸드리뷰어</span>
+                    <span class="review-date">2025.03.18 방문</span>
+                </div>
+                <div class="review-content">
+                    <p>파스타는 맛있었지만 서비스가 조금 아쉬웠습니다. 웨이팅 시간도 예상보다 길었고, 테이블 간격이 좁아 불편했어요. 하지만 음식 맛 자체는 괜찮았습니다.</p>
+                </div>
+                <div class="review-footer">
+                    <div class="review-reactions">
+                        <button class="btn-like">
+                            <i class="far fa-thumbs-up"></i>
+                            <span>5</span>
+                        </button>
+                        <button class="btn-comment">
+                            <i class="far fa-comment"></i>
+                            <span>2</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
