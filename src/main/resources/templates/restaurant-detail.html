@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>맛집 상세 정보 - 맛집 탐색기</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/restaurant-detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- 카카오맵 API -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=71618b59fd9edd408b6aa0e6ed2122c8&libraries=services"></script>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-utensils"></i>
+            <h1>맛집 탐색기</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">홈</a></li>
+                <li><a href="/favorites">즐겨찾기</a></li>
+                <li><a href="/reviews">리뷰</a></li>
+                <li><a href="/login">로그인</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</header>
+
+<section class="restaurant-header">
+    <div class="container">
+        <div class="restaurant-header-content">
+            <div class="restaurant-info">
+                <h2 id="restaurant-name">맛있는 한식당</h2>
+                <div class="restaurant-meta">
+                    <span class="category"><i class="fas fa-utensils"></i> 한식</span>
+                    <span class="location"><i class="fas fa-map-marker-alt"></i> 인천 미추홀구</span>
+                    <span class="rating"><i class="fas fa-star"></i> 4.5</span>
+                    <span class="reviews-count"><i class="fas fa-comment"></i> 리뷰 28</span>
+                </div>
+                <div class="restaurant-tags">
+                    <span>주차가능</span>
+                    <span>단체석</span>
+                    <span>배달가능</span>
+                    <span>포장가능</span>
+                </div>
+            </div>
+            <div class="restaurant-actions">
+                <button class="btn-primary btn-favorite"><i class="far fa-bookmark"></i> 즐겨찾기</button>
+                <button class="btn-primary btn-share"><i class="fas fa-share-alt"></i> 공유하기</button>
+                <button class="btn-primary btn-review"><i class="fas fa-pencil-alt"></i> 리뷰쓰기</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="restaurant-gallery">
+    <div class="container">
+        <div class="gallery-container">
+            <div class="main-image">
+                <img src="https://via.placeholder.com/800x500" alt="맛있는 한식당 대표 이미지">
+            </div>
+            <div class="thumbnail-images">
+                <img src="https://via.placeholder.com/200x150" alt="맛있는 한식당 1" class="active">
+                <img src="https://via.placeholder.com/200x150" alt="맛있는 한식당 2">
+                <img src="https://via.placeholder.com/200x150" alt="맛있는 한식당 3">
+                <img src="https://via.placeholder.com/200x150" alt="맛있는 한식당 4">
+                <button class="more-photos"><i class="fas fa-plus"></i> 더보기</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="restaurant-content">
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="main-content">
+                <div class="restaurant-tabs">
+                    <button class="tab-btn active" data-tab="info">정보</button>
+                    <button class="tab-btn" data-tab="menu">메뉴</button>
+                    <button class="tab-btn" data-tab="reviews">리뷰</button>
+                </div>
+
+                <div class="tab-content active" id="info">
+                    <div class="info-section">
+                        <h3>영업 정보</h3>
+                        <ul class="info-list">
+                            <li><span class="info-label">영업시간</span><span class="info-value">11:00 - 21:30 (라스트오더 21:00)</span></li>
+                            <li><span class="info-label">휴무일</span><span class="info-value">매주 월요일</span></li>
+                            <li><span class="info-label">전화번호</span><span class="info-value">032-123-4567</span></li>
+                            <li><span class="info-label">주소</span><span class="info-value">인천 미추홀구 용현동 123-45</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>편의 시설</h3>
+                        <div class="facility-icons">
+                            <div class="facility-item">
+                                <i class="fas fa-parking"></i>
+                                <span>주차</span>
+                            </div>
+                            <div class="facility-item">
+                                <i class="fas fa-wifi"></i>
+                                <span>와이파이</span>
+                            </div>
+                            <div class="facility-item">
+                                <i class="fas fa-credit-card"></i>
+                                <span>카드결제</span>
+                            </div>
+                            <div class="facility-item">
+                                <i class="fas fa-baby"></i>
+                                <span>유아의자</span>
+                            </div>
+                            <div class="facility-item">
+                                <i class="fas fa-user-friends"></i>
+                                <span>단체석</span>
+                            </div>
+                            <div class="facility-item">
+                                <i class="fas fa-smoking-ban"></i>
+                                <span>금연</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>소개</h3>
+                        <p class="restaurant-description">
+                            인천 미추홀구에 위치한 '맛있는 한식당'은 전통 한식을 현대적으로 재해석한 메뉴를 선보이는 맛집입니다.
+                            신선한 제철 재료만을 사용하여 건강하고 맛있는 음식을 제공합니다.
+                            특히 김치찌개와 된장찌개는 이 식당의 시그니처 메뉴로, 깊은 맛을 자랑합니다.
+                            가족 모임이나 소규모 단체 모임에도 적합한 공간을 갖추고 있습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="menu">
+                    <div class="menu-categories">
+                        <button class="menu-category active">대표 메뉴</button>
+                        <button class="menu-category">식사 메뉴</button>
+                        <button class="menu-category">사이드 메뉴</button>
+                        <button class="menu-category">주류</button>
+                    </div>
+
+                    <div class="menu-list">
+                        <div class="menu-item">
+                            <div class="menu-image">
+                                <img src="https://via.placeholder.com/150x150" alt="김치찌개">
+                            </div>
+                            <div class="menu-info">
+                                <h4 class="menu-name">김치찌개</h4>
+                                <p class="menu-description">묵은지와 국내산 삼겹살을 넣어 깊은 맛을 낸 시그니처 메뉴</p>
+                                <p class="menu-price">9,000원</p>
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-image">
+                                <img src="https://via.placeholder.com/150x150" alt="된장찌개">
+                            </div>
+                            <div class="menu-info">
+                                <h4 class="menu-name">된장찌개</h4>
+                                <p class="menu-description">100% 국내산 청국장으로 맛을 낸 건강한 된장찌개</p>
+                                <p class="menu-price">8,500원</p>
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-image">
+                                <img src="https://via.placeholder.com/150x150" alt="제육볶음">
+                            </div>
+                            <div class="menu-info">
+                                <h4 class="menu-name">제육볶음</h4>
+                                <p class="menu-description">매콤한 양념에 볶아낸 두툼한 삼겹살 제육볶음</p>
+                                <p class="menu-price">12,000원</p>
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-image">
+                                <img src="https://via.placeholder.com/150x150" alt="불고기">
+                            </div>
+                            <div class="menu-info">
+                                <h4 class="menu-name">불고기</h4>
+                                <p class="menu-description">특제 양념에 24시간 숙성시킨 부드러운 소고기 불고기</p>
+                                <p class="menu-price">15,000원</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="reviews">
+                    <div class="reviews-header">
+                        <div class="reviews-summary">
+                            <div class="average-rating">
+                                <div class="rating-number">4.5</div>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <div class="rating-count">28개 리뷰</div>
+                            </div>
+                            <div class="rating-distribution">
+                                <div class="rating-bar">
+                                    <span class="rating-label">5점</span>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 60%;"></div>
+                                    </div>
+                                    <span class="rating-percentage">60%</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span class="rating-label">4점</span>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 30%;"></div>
+                                    </div>
+                                    <span class="rating-percentage">30%</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span class="rating-label">3점</span>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 7%;"></div>
+                                    </div>
+                                    <span class="rating-percentage">7%</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span class="rating-label">2점</span>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 2%;"></div>
+                                    </div>
+                                    <span class="rating-percentage">2%</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span class="rating-label">1점</span>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 1%;"></div>
+                                    </div>
+                                    <span class="rating-percentage">1%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-filters">
+                            <select id="review-sort">
+                                <option value="recent">최신순</option>
+                                <option value="rating-high">평점 높은순</option>
+                                <option value="rating-low">평점 낮은순</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="reviews-list">
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <img src="https://via.placeholder.com/40" alt="프로필 이미지" class="reviewer-img">
+                                    <div class="reviewer-details">
+                                        <div class="reviewer-name">맛집탐험가</div>
+                                        <div class="review-date">2025.03.20 방문</div>
+                                    </div>
+                                </div>
+                                <div class="review-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span>5.0</span>
+                                </div>
+                            </div>
+                            <div class="review-content">
+                                <p>김치찌개가 정말 맛있었어요! 묵은지를 넣어서 그런지 깊은 맛이 났습니다. 반찬도 푸짐하게 나와서 만족스러웠습니다. 직원분들도 친절하셔서 좋았어요. 다음에도 꼭 방문하고 싶은 맛집입니다.</p>
+                            </div>
+                            <div class="review-images">
+                                <img src="https://via.placeholder.com/150" alt="리뷰 이미지">
+                                <img src="https://via.placeholder.com/150" alt="리뷰 이미지">
+                            </div>
+                            <div class="review-footer">
+                                <div class="review-reactions">
+                                    <button class="btn-like">
+                                        <i class="far fa-thumbs-up"></i>
+                                        <span>12</span>
+                                    </button>
+                                    <button class="btn-comment">
+                                        <i class="far fa-comment"></i>
+                                        <span>3</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <img src="https://via.placeholder.com/40" alt="프로필 이미지" class="reviewer-img">
+                                    <div class="reviewer-details">
+                                        <div class="reviewer-name">푸드리뷰어</div>
+                                        <div class="review-date">2025.03.18 방문</div>
+                                    </div>
+                                </div>
+                                <div class="review-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span>4.0</span>
+                                </div>
+                            </div>
+                            <div class="review-content">
+                                <p>음식은 맛있었지만 조금 기다리는 시간이 길었어요. 주말이라 그런지 사람이 많았습니다. 하지만 맛은 정말 좋았어요! 특히 제육볶음이 매콤하니 맛있었습니다.</p>
+                            </div>
+                            <div class="review-footer">
+                                <div class="review-reactions">
+                                    <button class="btn-like">
+                                        <i class="far fa-thumbs-up"></i>
+                                        <span>5</span>
+                                    </button>
+                                    <button class="btn-comment">
+                                        <i class="far fa-comment"></i>
+                                        <span>1</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <img src="https://via.placeholder.com/40" alt="프로필 이미지" class="reviewer-img">
+                                    <div class="reviewer-details">
+                                        <div class="reviewer-name">맛있는인천</div>
+                                        <div class="review-date">2025.03.15 방문</div>
+                                    </div>
+                                </div>
+                                <div class="review-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span>3.5</span>
+                                </div>
+                            </div>
+                            <div class="review-content">
+                                <p>된장찌개를 주문했는데 평범한 맛이었습니다. 기대했던 것보다는 조금 아쉬웠어요. 반찬은 맛있었고 양도 많아서 좋았습니다. 다음에는 김치찌개를 먹어보고 싶어요.</p>
+                            </div>
+                            <div class="review-footer">
+                                <div class="review-reactions">
+                                    <button class="btn-like">
+                                        <i class="far fa-thumbs-up"></i>
+                                        <span>3</span>
+                                    </button>
+                                    <button class="btn-comment">
+                                        <i class="far fa-comment"></i>
+                                        <span>0</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reviews-pagination">
+                        <button class="pagination-btn prev"><i class="fas fa-chevron-left"></i></button>
+                        <div class="page-numbers">
+                            <button class="page-number active">1</button>
+                            <button class="page-number">2</button>
+                            <button class="page-number">3</button>
+                        </div>
+                        <button class="pagination-btn next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="map-container">
+                    <h3>위치</h3>
+                    <div id="restaurant-map" style="width:100%;height:250px;"></div>
+                    <div class="address-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 인천 미추홀구 용현동 123-45</p>
+                        <div class="map-actions">
+                            <button class="btn-copy-address"><i class="fas fa-copy"></i> 주소 복사</button>
+                            <button class="btn-find-way"><i class="fas fa-directions"></i> 길찾기</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="restaurant-hours">
+                    <h3>영업시간</h3>
+                    <ul class="hours-list">
+                        <li class="current-day">
+                            <span class="day">오늘</span>
+                            <span class="hours">11:00 - 21:30</span>
+                        </li>
+                        <li>
+                            <span class="day">월요일</span>
+                            <span class="hours closed">휴무일</span>
+                        </li>
+                        <li>
+                            <span class="day">화요일</span>
+                            <span class="hours">11:00 - 21:30</span>
+                        </li>
+                        <li>
+                            <span class="day">수요일</span>
+                            <span class="hours">11:00 - 21:30</span>
+                        </li>
+                        <li>
+                            <span class="day">목요일</span>
+                            <span class="hours">11:00 - 21:30</span>
+                        </li>
+                        <li>
+                            <span class="day">금요일</span>
+                            <span class="hours">11:00 - 22:00</span>
+                        </li>
+                        <li>
+                            <span class="day">토요일</span>
+                            <span class="hours">11:00 - 22:00</span>
+                        </li>
+                        <li>
+                            <span class="day">일요일</span>
+                            <span class="hours">11:00 - 21:30</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="restaurant-contact">
+                    <h3>연락처</h3>
+                    <p><i class="fas fa-phone"></i> 032-123-4567</p>
+                    <p><i class="fas fa-globe"></i> <a href="#" class="website-link">www.deliciouskorean.com</a></p>
+                </div>
+
+                <div class="nearby-restaurants">
+                    <h3>주변 맛집</h3>
+                    <div class="nearby-list">
+                        <div class="nearby-item">
+                            <img src="https://via.placeholder.com/60x60" alt="주변 맛집">
+                            <div class="nearby-info">
+                                <h4>분위기 좋은 카페</h4>
+                                <p>카페 • 180m</p>
+                                <div class="nearby-rating">
+                                    <i class="fas fa-star"></i> 4.8
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nearby-item">
+                            <img src="https://via.placeholder.com/60x60" alt="주변 맛집">
+                            <div class="nearby-info">
+                                <h4>스시 오마카세</h4>
+                                <p>일식 • 210m</p>
+                                <div class="nearby-rating">
+                                    <i class="fas fa-star"></i> 4.2
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nearby-item">
+                            <img src="https://via.placeholder.com/60x60" alt="주변 맛집">
+                            <div class="nearby-info">
+                                <h4>중국집 원조</h4>
+                                <p>중식 • 250m</p>
+                                <div class="nearby-rating">
+                                    <i class="fas fa-star"></i> 4.0
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="share-modal" id="shareModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>공유하기</h3>
+            <button class="modal-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="share-options">
+                <button class="share-btn kakao">
+                    <i class="fas fa-comment"></i>
+                    <span>카카오톡</span>
+                </button>
+                <button class="share-btn facebook">
+                    <i class="fab fa-facebook-f"></i>
+                    <span>페이스북</span>
+                </button>
+                <button class="share-btn twitter">
+                    <i class="fab fa-twitter"></i>
+                    <span>트위터</span>
+                </button>
+                <button class="share-btn link">
+                    <i class="fas fa-link"></i>
+                    <span>URL 복사</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="logo">
+                    <i class="fas fa-utensils"></i>
+                    <h2>맛집 탐색기</h2>
+                </div>
+                <p>내 주변의 맛집을 쉽고 빠르게 찾아보세요</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>서비스</h4>
+                    <ul>
+                        <li><a href="/">맛집 찾기</a></li>
+                        <li><a href="/reviews">리뷰 작성</a></li>
+                        <li><a href="/favorites">즐겨찾기</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>정보</h4>
+                    <ul>
+                        <li><a href="#">서비스 소개</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">개인정보처리방침</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>문의</h4>
+                    <ul>
+                        <li><a href="#">고객센터</a></li>
+                        <li><a href="#">제휴문의</a></li>
+                        <li><a href="#">광고문의</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 맛집 탐색기. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script src="/js/kakao-map.js"></script>
+<script src="/js/restaurant-detail.js"></script>
+</body>
+</html>

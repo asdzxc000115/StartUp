@@ -1,0 +1,931 @@
+/* 맛집 상세 페이지 스타일 */
+
+/* 헤더 섹션 */
+.restaurant-header {
+    background-color: #ffe8e8;
+    padding: 40px 0;
+}
+
+.restaurant-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.restaurant-info {
+    flex: 1;
+    min-width: 300px;
+    margin-bottom: 20px;
+}
+
+.restaurant-info h2 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.restaurant-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.restaurant-meta span {
+    display: flex;
+    align-items: center;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.restaurant-meta i {
+    margin-right: 5px;
+    color: #ff6b6b;
+}
+
+.restaurant-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.restaurant-tags span {
+    background-color: #fff;
+    color: #666;
+    padding: 5px 12px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+}
+
+.restaurant-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.restaurant-actions button {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.restaurant-actions button i {
+    margin-right: 5px;
+}
+
+/* 갤러리 섹션 */
+.restaurant-gallery {
+    padding: 30px 0;
+    background-color: #fff;
+}
+
+.gallery-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.main-image {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail-images {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.thumbnail-images img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.thumbnail-images img.active {
+    border: 2px solid #ff6b6b;
+}
+
+.thumbnail-images img:hover {
+    transform: scale(1.05);
+}
+
+.more-photos {
+    min-width: 100px;
+    height: 100px;
+    background-color: #f8f9fa;
+    border: 1px dashed #ddd;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.more-photos:hover {
+    background-color: #e9ecef;
+}
+
+.more-photos i {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    color: #adb5bd;
+}
+
+/* 콘텐츠 섹션 */
+.restaurant-content {
+    padding: 40px 0 60px;
+    background-color: #f8f9fa;
+}
+
+.content-wrapper {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 320px;
+    max-width: 800px;
+}
+
+.sidebar {
+    width: 320px;
+}
+
+/* 탭 컨텐츠 */
+.restaurant-tabs {
+    display: flex;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.tab-btn.active {
+    color: #ff6b6b;
+    border-bottom: 2px solid #ff6b6b;
+}
+
+.tab-content {
+    display: none;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* 정보 탭 */
+.info-section {
+    margin-bottom: 30px;
+}
+
+.info-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.info-list {
+    list-style: none;
+}
+
+.info-list li {
+    display: flex;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.info-list li:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    width: 90px;
+    color: #777;
+    font-weight: 500;
+}
+
+.info-value {
+    flex: 1;
+    color: #333;
+}
+
+.facility-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.facility-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    text-align: center;
+}
+
+.facility-item i {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    color: #ff6b6b;
+}
+
+.restaurant-description {
+    line-height: 1.7;
+    color: #555;
+}
+
+/* 메뉴 탭 */
+.menu-categories {
+    display: flex;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.menu-category {
+    padding: 8px 15px;
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+.menu-category.active {
+    background-color: #ff6b6b;
+    color: white;
+    border-color: #ff6b6b;
+}
+
+.menu-item {
+    display: flex;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.menu-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.menu-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu-info {
+    flex: 1;
+}
+
+.menu-name {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.menu-description {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.menu-price {
+    font-weight: 600;
+    color: #ff6b6b;
+}
+
+/* 리뷰 탭 */
+.reviews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.reviews-summary {
+    display: flex;
+    gap: 30px;
+}
+
+.average-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rating-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #333;
+    line-height: 1;
+}
+
+.rating-stars {
+    margin: 8px 0;
+    color: #ffcc00;
+    font-size: 1.2rem;
+}
+
+.rating-count {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.rating-distribution {
+    flex: 1;
+}
+
+.rating-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.rating-label {
+    width: 30px;
+    text-align: right;
+    margin-right: 10px;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+.progress {
+    height: 100%;
+    background-color: #ffcc00;
+}
+
+.rating-percentage {
+    width: 40px;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.review-filters select {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.review-item {
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 20px;
+}
+
+.review-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+}
+
+.reviewer-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.reviewer-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.reviewer-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.review-date {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.review-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.stars {
+    color: #ffcc00;
+    margin-bottom: 3px;
+}
+
+.review-rating span {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.review-content {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.review-images {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
+
+.review-images img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.review-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.review-reactions {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-like, .btn-comment {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    color: #777;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.btn-like:hover, .btn-comment:hover {
+    color: #ff6b6b;
+}
+
+.btn-like i, .btn-comment i {
+    margin-right: 5px;
+}
+
+.reviews-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination-btn {
+    width: 40px;
+    height: 40px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.pagination-btn:hover {
+    background-color: #e9ecef;
+}
+
+.page-numbers {
+    display: flex;
+    margin: 0 10px;
+}
+
+.page-number {
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: 1px solid #ddd;
+    margin: 0 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.page-number.active {
+    background-color: #ff6b6b;
+    color: white;
+    border-color: #ff6b6b;
+}
+
+.page-number:hover:not(.active) {
+    background-color: #e9ecef;
+}
+
+/* 사이드바 */
+.sidebar > div {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.sidebar h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.map-container {
+    margin-bottom: 25px;
+}
+
+.address-info {
+    margin-top: 15px;
+}
+
+.address-info p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.address-info p i {
+    margin-right: 8px;
+    color: #ff6b6b;
+}
+
+.map-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.map-actions button {
+    flex: 1;
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-copy-address {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+.btn-find-way {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.btn-copy-address:hover {
+    background-color: #dee2e6;
+}
+
+.btn-find-way:hover {
+    background-color: #fa5252;
+}
+
+.map-actions button i {
+    margin-right: 5px;
+}
+
+.hours-list {
+    list-style: none;
+}
+
+.hours-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.hours-list li:last-child {
+    border-bottom: none;
+}
+
+.hours-list .day {
+    color: #555;
+}
+
+.hours-list .hours {
+    color: #333;
+    font-weight: 500;
+}
+
+.hours-list .closed {
+    color: #dc3545;
+}
+
+.current-day {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 8px !important;
+    font-weight: 600;
+}
+
+.restaurant-contact p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.restaurant-contact p i {
+    margin-right: 8px;
+    color: #ff6b6b;
+    width: 16px;
+}
+
+.website-link {
+    color: #ff6b6b;
+    transition: color 0.3s;
+}
+
+.website-link:hover {
+    text-decoration: underline;
+}
+
+.nearby-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.nearby-item {
+    display: flex;
+    align-items: center;
+}
+
+.nearby-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.nearby-info h4 {
+    font-size: 1rem;
+    margin-bottom: 3px;
+    color: #333;
+}
+
+.nearby-info p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 3px;
+}
+
+.nearby-rating {
+    color: #ffcc00;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.nearby-rating i {
+    margin-right: 3px;
+}
+
+/* 공유하기 모달 */
+.share-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+    font-size: 1.3rem;
+    color: #333;
+    margin: 0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #777;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.share-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.share-btn {
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    color: white;
+    transition: opacity 0.3s;
+}
+
+.share-btn:hover {
+    opacity: 0.9;
+}
+
+.share-btn i {
+    font-size: 1.5rem;
+}
+
+.share-btn.kakao {
+    background-color: #FEE500;
+    color: #333;
+}
+
+.share-btn.facebook {
+    background-color: #1877F2;
+}
+
+.share-btn.twitter {
+    background-color: #1DA1F2;
+}
+
+.share-btn.link {
+    background-color: #555;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 992px) {
+    .restaurant-header-content {
+        flex-direction: column;
+    }
+
+    .restaurant-actions {
+        margin-top: 20px;
+    }
+
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .reviews-summary {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-image {
+        height: 300px;
+    }
+
+    .restaurant-info h2 {
+        font-size: 1.8rem;
+    }
+
+    .restaurant-meta {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu-item {
+        flex-direction: column;
+    }
+
+    .menu-image {
+        width: 100%;
+        height: 200px;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .restaurant-header {
+        padding: 30px 0;
+    }
+
+    .restaurant-info h2 {
+        font-size: 1.5rem;
+    }
+
+    .tab-btn {
+        padding: 10px 15px;
+        font-size: 1rem;
+    }
+
+    .share-options {
+        grid-template-columns: 1fr;
+    }
+}
